@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { Home } from "./pages/home";
+import { TaskListFormPage } from "./pages/task-list-form-page";
+import { Toaster } from "./components/ui/toaster";
 
-const TaskLists = () => <h1>Tasks Lists</h1>;
-const CreateUpdateTaskListScreen = () => <h1>Create / Update Task List</h1>;
+const TaskLists = () => <Home />;
+const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
 const TaskListScreen = () => <h1>Tasks</h1>;
 const CreateUpdateTaskScreen = () => <h1>Create / Update Task</h1>;
 
 function App() {
   return (
     <Router>
+      <Toaster />
       <nav>
-        <Link to="/">Task Lists</Link> |{" "}
-        <Link to="/new-task-list">Create task list</Link>
+        <Link to="/">Task Lists</Link>
       </nav>
-
       <Routes>
         <Route path="/" element={<TaskLists />} />
         <Route path="/new-task-list" element={<CreateUpdateTaskListScreen />} />
