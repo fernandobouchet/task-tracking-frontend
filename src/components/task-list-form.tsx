@@ -1,9 +1,10 @@
-import { Button, Fieldset, Input, Textarea } from "@chakra-ui/react";
+import { Button, Fieldset, HStack, Input, Textarea } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
 import { createTaskList } from "@/lib/actions";
 import { toaster } from "./ui/toaster";
 import { useNavigate } from "react-router-dom";
+import { BackButton } from "./back-button";
 
 const TaskListForm = () => {
   const navigate = useNavigate();
@@ -62,17 +63,20 @@ const TaskListForm = () => {
         <Fieldset.ErrorText>
           Some fields are invalid. Please check them.
         </Fieldset.ErrorText>
-        <Button
-          type="submit"
-          colorPalette="teal"
-          variant="solid"
-          rounded="full"
-          minW="xs"
-          maxW="lg"
-          alignSelf="center"
-        >
-          Create
-        </Button>
+        <HStack justify="space-between" gap="5">
+          <BackButton />
+          <Button
+            type="submit"
+            fontSize="lg"
+            size="lg"
+            colorPalette="teal"
+            variant="solid"
+            rounded="full"
+            width="1/3"
+          >
+            Create
+          </Button>
+        </HStack>
       </Fieldset.Root>
     </form>
   );
