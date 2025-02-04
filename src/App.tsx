@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Home } from "./pages/home";
 import { TaskListFormPage } from "./pages/task-list-form-page";
 import { Toaster } from "./components/ui/toaster";
+import { Text } from "@chakra-ui/react";
 
 const TaskLists = () => <Home />;
 const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
@@ -12,8 +13,12 @@ function App() {
   return (
     <Router>
       <Toaster />
-      <nav>
-        <Link to="/">Task Lists</Link>
+      <nav className="nav">
+        <Link to="/">
+          <Text fontWeight={500} fontSize={{ base: "2xl" }}>
+            Home
+          </Text>
+        </Link>
       </nav>
       <Routes>
         <Route path="/" element={<TaskLists />} />

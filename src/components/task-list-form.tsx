@@ -1,4 +1,4 @@
-import { Button, Fieldset, Input, Stack, Textarea } from "@chakra-ui/react";
+import { Button, Fieldset, Input, Textarea } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
 import { createTaskList } from "@/lib/actions";
@@ -40,12 +40,8 @@ const TaskListForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Fieldset.Root size="lg" maxW="md">
-        <Stack>
-          <Fieldset.Legend>Create task list</Fieldset.Legend>
-        </Stack>
-
+    <form onSubmit={handleSubmit} className="form">
+      <Fieldset.Root size="lg" maxW="lg" margin="auto">
         <Fieldset.Content>
           <Field label="Title" required>
             <Input
@@ -66,7 +62,15 @@ const TaskListForm = () => {
         <Fieldset.ErrorText>
           Some fields are invalid. Please check them.
         </Fieldset.ErrorText>
-        <Button type="submit" alignSelf="flex-start">
+        <Button
+          type="submit"
+          colorPalette="teal"
+          variant="solid"
+          rounded="full"
+          minW="xs"
+          maxW="lg"
+          alignSelf="center"
+        >
           Create
         </Button>
       </Fieldset.Root>
