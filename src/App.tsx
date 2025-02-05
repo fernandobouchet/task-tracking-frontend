@@ -4,6 +4,7 @@ import { TaskListFormPage } from "./pages/task-list-form-page";
 import { Toaster } from "./components/ui/toaster";
 import { Text } from "@chakra-ui/react";
 import { TaskListPage } from "./pages/task-list-page";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const TaskLists = () => <Home />;
 const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
@@ -11,34 +12,41 @@ const TaskListScreen = () => <TaskListPage />;
 const CreateUpdateTaskScreen = () => <h1>Create / Update Task</h1>;
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <Router>
-      <Toaster />
-      <nav className="nav">
-        <Link to="/">
-          <Text fontWeight={500} fontSize={{ base: "2xl" }}>
-            Home
-          </Text>
-        </Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<TaskLists />} />
-        <Route path="/new-task-list" element={<CreateUpdateTaskListScreen />} />
-        <Route
-          path="/edit-task-list/:listId"
-          element={<CreateUpdateTaskListScreen />}
-        />
-        <Route path="/task-lists/:listId" element={<TaskListScreen />} />
-        <Route
-          path="/task-lists/:listId/new-task"
-          element={<CreateUpdateTaskScreen />}
-        />
-        <Route
-          path="/task-lists/:listId/edit-task/:taskId"
-          element={<CreateUpdateTaskScreen />}
-        />
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Toaster />
+        <nav className="nav">
+          <Link to="/">
+            <Text fontWeight={500} fontSize={{ base: "2xl" }}>
+              Home
+            </Text>
+          </Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<TaskLists />} />
+          <Route
+            path="/new-task-list"
+            element={<CreateUpdateTaskListScreen />}
+          />
+          <Route
+            path="/edit-task-list/:listId"
+            element={<CreateUpdateTaskListScreen />}
+          />
+          <Route path="/task-lists/:listId" element={<TaskListScreen />} />
+          <Route
+            path="/task-lists/:listId/new-task"
+            element={<CreateUpdateTaskScreen />}
+          />
+          <Route
+            path="/task-lists/:listId/edit-task/:taskId"
+            element={<CreateUpdateTaskScreen />}
+          />
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
