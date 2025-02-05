@@ -1,17 +1,27 @@
 import { Button, Fieldset, HStack, Input, Textarea } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
-import { createTaskList } from "@/lib/actions";
 import { toaster } from "./ui/toaster";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BackButton } from "./back-button";
+import {
+  useCreateTaskList,
+  useTaskLists,
+  useUpdateTaskList,
+} from "@/hooks/useTaskList";
 
-interface Props {
-  taskListToEdit?: TaskList;
-}
-
-const TaskListForm = ({ taskListToEdit }: Props) => {
+const TaskListForm = () => {
   const navigate = useNavigate();
+  const { listId } = useParams();
+
+  const { data: taskLists } = useTaskLists();
+
+  const taskListToEdit = taskLists?.find(
+    (task: TaskList) => task.id === listId
+  );
+
+  const createTaskList = useCreateTaskList();
+  const updateTaskList = useUpdateTaskList();
 
   const [taskList, setTaskList] = useState<NewTaskListForm>({
     title: "",
@@ -29,8 +39,7 @@ const TaskListForm = ({ taskListToEdit }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    toaster.promise(createTaskList(taskList), {
+    toaster.promise(createTaskList.mutateAsync(taskList), {
       success: (data) => {
         const taskId = data.id;
         navigate(`/task-lists/${taskId}`);
@@ -44,8 +53,37 @@ const TaskListForm = ({ taskListToEdit }: Props) => {
     });
   };
 
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    toaster.promise(
+      updateTaskList.mutateAsync({
+        id: listId!,
+        data: {
+          ...taskListToEdit!,
+          title: taskList.title,
+          description: taskList.description,
+        },
+      }),
+      {
+        success: (data) => {
+          const taskId = data.id;
+          navigate(`/task-lists/${taskId}`);
+          return { title: "Successfully updated task list!" };
+        },
+        error: {
+          title: "Failed to update task list",
+          description: "Something wrong updating the task list",
+        },
+        loading: { title: "Updating task list...", description: "Please wait" },
+      }
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form
+      onSubmit={taskListToEdit ? handleUpdate : handleSubmit}
+      className="form"
+    >
       <Fieldset.Root size="lg" maxW="lg" margin="auto">
         <Fieldset.Content>
           <Field label="Title" required>
@@ -78,7 +116,6 @@ const TaskListForm = ({ taskListToEdit }: Props) => {
             colorPalette="teal"
             variant="solid"
             rounded="full"
-            width="1/3"
           >
             Save
           </Button>

@@ -1,5 +1,5 @@
 import { CardTaskList } from "@/components/card-task-list";
-import { fetchTaskLists } from "@/lib/actions";
+import { useTaskLists } from "@/hooks/useTaskList";
 import {
   Button,
   Center,
@@ -9,20 +9,10 @@ import {
   Spinner,
   Stack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
-  const [tasksList, setTasksList] = useState<TaskList[]>();
-
-  useEffect(() => {
-    const getTasks = async () => {
-      const data = await fetchTaskLists();
-      setTasksList(data);
-    };
-
-    getTasks();
-  }, []);
+  const { data, isLoading } = useTaskLists();
 
   return (
     <Container padding="2rem">
@@ -48,12 +38,12 @@ const Home = () => {
               <NavLink to="/new-task-list">New task list</NavLink>
             </Button>
             <Stack width={{ base: "sm", sm: "xl" }}>
-              {tasksList ? (
-                tasksList?.map((e) => <CardTaskList key={e.id} data={e} />)
-              ) : (
+              {isLoading ? (
                 <Center>
                   <Spinner size="xl" />
                 </Center>
+              ) : (
+                data?.map((e) => <CardTaskList key={e.id} data={e} />)
               )}
             </Stack>
           </Flex>

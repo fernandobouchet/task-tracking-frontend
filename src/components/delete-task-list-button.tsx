@@ -1,4 +1,4 @@
-import { deleteTaskListById } from "@/lib/actions";
+import { useDeleteTaskList } from "@/hooks/useTaskList";
 import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,11 +9,12 @@ interface Props {
 const DeleteTaskListButton = ({ id }: Props) => {
   const navigate = useNavigate();
 
+  const deleteTaskList = useDeleteTaskList();
+
   const handleOnClick = async () => {
-    const data = await deleteTaskListById(id);
-    if (!data) {
-      navigate("/");
-    }
+    deleteTaskList.mutate(id, {
+      onSuccess: () => navigate("/"),
+    });
   };
 
   return (
