@@ -6,7 +6,11 @@ import { toaster } from "./ui/toaster";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "./back-button";
 
-const TaskListForm = () => {
+interface Props {
+  taskListToEdit?: TaskList;
+}
+
+const TaskListForm = ({ taskListToEdit }: Props) => {
   const navigate = useNavigate();
 
   const [taskList, setTaskList] = useState<NewTaskListForm>({
@@ -48,6 +52,7 @@ const TaskListForm = () => {
             <Input
               name="title"
               onChange={handleTaskListChange}
+              defaultValue={taskListToEdit ? taskListToEdit.title : ""}
               placeholder="Enter a task list title"
             />
           </Field>
@@ -56,6 +61,7 @@ const TaskListForm = () => {
             <Textarea
               name="description"
               onChange={handleTaskListChange}
+              defaultValue={taskListToEdit ? taskListToEdit.description : ""}
               placeholder="Enter task list description"
             />
           </Field>
@@ -74,7 +80,7 @@ const TaskListForm = () => {
             rounded="full"
             width="1/3"
           >
-            Create
+            Save
           </Button>
         </HStack>
       </Fieldset.Root>

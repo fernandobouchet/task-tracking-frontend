@@ -11,7 +11,6 @@ const BackButton = () => {
       colorPalette="teal"
       variant="solid"
       rounded="full"
-      width="1/3"
       onClick={() => navigate(-1)}
     >
       Back

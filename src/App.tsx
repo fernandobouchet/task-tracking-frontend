@@ -3,10 +3,11 @@ import { Home } from "./pages/home";
 import { TaskListFormPage } from "./pages/task-list-form-page";
 import { Toaster } from "./components/ui/toaster";
 import { Text } from "@chakra-ui/react";
+import { TaskListPage } from "./pages/task-list-page";
 
 const TaskLists = () => <Home />;
 const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
-const TaskListScreen = () => <h1>Tasks</h1>;
+const TaskListScreen = () => <TaskListPage />;
 const CreateUpdateTaskScreen = () => <h1>Create / Update Task</h1>;
 
 function App() {
