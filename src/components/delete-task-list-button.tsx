@@ -26,7 +26,7 @@ const DeleteTaskListButton = ({ id }: Props) => {
       rounded="full"
       onClick={handleOnClick}
     >
-      Delete
+      Delete Task List
     </Button>
   );
 };

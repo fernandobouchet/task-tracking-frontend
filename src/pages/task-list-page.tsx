@@ -1,6 +1,8 @@
 import { BackButton } from "@/components/back-button";
 import { DeleteTaskListButton } from "@/components/delete-task-list-button";
 import { EditTaskListButton } from "@/components/edit-task-list-button";
+import { NewTaskButton } from "@/components/new-task-button";
+import { TasksTable } from "@/components/tasks-table";
 import { useTaskLists } from "@/hooks/useTaskList";
 import {
   Center,
@@ -40,6 +42,7 @@ const TaskListPage = () => {
               </Text>
               <EditTaskListButton id={listId!} />
             </HStack>
+            <NewTaskButton />
             <Progress.Root
               defaultValue={
                 isNaN(taskList?.progress as number) ||
@@ -55,9 +58,10 @@ const TaskListPage = () => {
                 </Progress.Track>
               </HStack>
             </Progress.Root>
+            {taskList?.tasks && <TasksTable tasks={taskList?.tasks} />}
             <DeleteTaskListButton id={listId!} />
           </>
-        )}{" "}
+        )}
       </Flex>
     </Container>
   );
