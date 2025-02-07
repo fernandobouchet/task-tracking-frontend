@@ -1,4 +1,4 @@
-import { Button, HStack, Table } from "@chakra-ui/react";
+import { Button, HStack, Table, Text } from "@chakra-ui/react";
 
 interface Props {
   tasks: Task[];
@@ -11,9 +11,17 @@ const TasksTable = ({ tasks }: Props) => {
     <Table.Row key={item.id}>
       <Table.Cell></Table.Cell>
       <Table.Cell>{item.status}</Table.Cell>
-      <Table.Cell>{item.title}</Table.Cell>
+      <Table.Cell>
+        <Text lineClamp={1}>{item.title}</Text>
+      </Table.Cell>
       <Table.Cell>{item.priority}</Table.Cell>
-      <Table.Cell>{item.dueDate?.getDate()}</Table.Cell>
+      <Table.Cell>
+        <Text whiteSpace="nowrap">
+          {item.dueDate
+            ? new Date(item?.dueDate).toISOString().split("T")[0]
+            : ""}
+        </Text>
+      </Table.Cell>
       <Table.Cell>
         <HStack>
           <Button>Edit</Button>

@@ -18,6 +18,11 @@ interface TaskList {
 
 type NewTaskListForm = Pick<TaskList, "title" | "description">;
 
+type NewTaskForm = Pick<
+  Task,
+  "title" | "description" | "dueDate" | "priority" | "status"
+>;
+
 enum TaskPriority {
   HIGH = "HIGH",
   MEDIUM = "MEDIUM",

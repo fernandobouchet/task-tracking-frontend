@@ -5,11 +5,12 @@ import { Toaster } from "./components/ui/toaster";
 import { Text } from "@chakra-ui/react";
 import { TaskListPage } from "./pages/task-list-page";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NewTaskPage } from "./pages/new-task-page";
 
 const TaskLists = () => <Home />;
 const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
 const TaskListScreen = () => <TaskListPage />;
-const CreateUpdateTaskScreen = () => <h1>Create / Update Task</h1>;
+const CreateUpdateTaskScreen = () => <NewTaskPage />;
 
 function App() {
   const queryClient = new QueryClient();
