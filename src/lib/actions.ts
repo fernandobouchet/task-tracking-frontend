@@ -29,3 +29,33 @@ export const updateTaskList = async (
   const response = await api.put(`/task-lists/${id}`, data);
   return response.data;
 };
+
+export const createTask = async (
+  id: string,
+  data: NewTaskForm
+): Promise<Task> => {
+  const response = await api.post(`/task-lists/${id}/tasks`, {
+    ...data,
+    dueDate: data.dueDate
+      ? data.dueDate.toISOString().split(".")[0]
+      : undefined,
+  });
+  return response.data;
+};
+
+export const deleteTaskById = async (
+  id: string,
+  taskId: string
+): Promise<Task> => {
+  const response = await api.delete(`/task-lists/${id}/tasks/${taskId}`);
+  return response.data;
+};
+
+export const updateTask = async (
+  id: string,
+  taskId: string,
+  data: Task
+): Promise<Task> => {
+  const response = await api.put(`/task-lists/${id}/tasks/${taskId}`, data);
+  return response.data;
+};
