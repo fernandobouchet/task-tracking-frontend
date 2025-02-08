@@ -20,10 +20,10 @@ const TasksTable = ({ tasks }: Props) => {
       </Table.Cell>
       <Table.Cell>{item.priority}</Table.Cell>
       <Table.Cell hideBelow="md">
-        <Text whiteSpace="nowrap">
+        <Text whiteSpace="nowrap" textAlign="center">
           {item.dueDate
-            ? new Date(item?.dueDate).toISOString().split("T")[0]
-            : ""}
+            ? new Date(item?.dueDate).toLocaleDateString().split("T")[0]
+            : "-"}
         </Text>
       </Table.Cell>
       <Table.Cell>
