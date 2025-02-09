@@ -1,5 +1,5 @@
 import { BackButton } from "@/components/back-button";
-import { DeleteTaskListButton } from "@/components/delete-task-list-button";
+import DeleteDialogAlert from "@/components/delete-alert-dialog";
 import { EditTaskListButton } from "@/components/edit-task-list-button";
 import { NewTaskButton } from "@/components/new-task-button";
 import { TasksTable } from "@/components/tasks-table";
@@ -59,7 +59,7 @@ const TaskListPage = () => {
               </HStack>
             </Progress.Root>
             {taskList?.tasks && <TasksTable tasks={taskList?.tasks} />}
-            <DeleteTaskListButton id={listId!} />
+            <DeleteDialogAlert />
           </>
         )}
       </Flex>
