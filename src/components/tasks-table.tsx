@@ -1,12 +1,14 @@
 import { Button, HStack, Table, Text } from "@chakra-ui/react";
 import { CiEdit, CiTrash } from "react-icons/ci";
 import { LuSquare, LuSquareCheck } from "react-icons/lu";
+import { NavLink, useParams } from "react-router-dom";
 
 interface Props {
   tasks: Task[];
 }
 
 const TasksTable = ({ tasks }: Props) => {
+  const { listId } = useParams();
   const items = tasks;
 
   const rows = items.map((item) => (
@@ -28,8 +30,10 @@ const TasksTable = ({ tasks }: Props) => {
       </Table.Cell>
       <Table.Cell>
         <HStack>
-          <Button variant="ghost" padding="0">
-            <CiEdit />
+          <Button variant="ghost" padding="0" asChild>
+            <NavLink to={`/task-lists/${listId}/edit-task/${item.id}`}>
+              <CiEdit />
+            </NavLink>
           </Button>
           <Button variant="ghost" padding="0">
             <CiTrash />

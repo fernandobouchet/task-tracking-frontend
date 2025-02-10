@@ -37,9 +37,10 @@ export const createTask = async (
   const response = await api.post(`/task-lists/${id}/tasks`, {
     ...data,
     dueDate: data.dueDate
-      ? data.dueDate.toISOString().split(".")[0]
+      ? new Date(data.dueDate).toISOString().split(".")[0]
       : undefined,
   });
+
   return response.data;
 };
 
@@ -56,6 +57,11 @@ export const updateTask = async (
   taskId: string,
   data: Task
 ): Promise<Task> => {
-  const response = await api.put(`/task-lists/${id}/tasks/${taskId}`, data);
+  const response = await api.put(`/task-lists/${id}/tasks/${taskId}`, {
+    ...data,
+    dueDate: data.dueDate
+      ? new Date(data.dueDate).toISOString().split(".")[0]
+      : undefined,
+  });
   return response.data;
 };

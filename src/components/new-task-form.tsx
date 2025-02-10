@@ -4,8 +4,8 @@ import { useState } from "react";
 import { toaster } from "./ui/toaster";
 import { useNavigate, useParams } from "react-router-dom";
 import { BackButton } from "./back-button";
-import { useTaskLists, useUpdateTaskList } from "@/hooks/useTaskList";
-import { useCreateTask } from "@/hooks/useTask";
+import { useTaskLists } from "@/hooks/useTaskList";
+import { useCreateTask, useUpdateTask } from "@/hooks/useTask";
 
 enum TaskPriority {
   HIGH = "HIGH",
@@ -33,14 +33,14 @@ const NewTaskForm = () => {
   );
 
   const createTask = useCreateTask(listId!);
-  const updateTaskList = useUpdateTaskList();
+  const updateTask = useUpdateTask();
 
   const [task, setTask] = useState<NewTaskForm>({
-    title: "",
-    description: "",
-    dueDate: undefined,
-    priority: TaskPriority.MEDIUM,
-    status: TaskStatus.OPEN,
+    title: taskToEdit ? taskToEdit.title : "",
+    description: taskToEdit ? taskToEdit.description : "",
+    dueDate: taskToEdit ? taskToEdit.dueDate : undefined,
+    priority: taskToEdit ? taskToEdit.priority : TaskPriority.MEDIUM,
+    status: taskToEdit ? taskToEdit.status : TaskStatus.OPEN,
   });
 
   const handleTaskListChange = (
@@ -70,18 +70,22 @@ const NewTaskForm = () => {
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     toaster.promise(
-      updateTaskList.mutateAsync({
+      updateTask.mutateAsync({
         id: listId!,
+        taskId: taskToEdit!.id!,
         data: {
-          ...taskListToEdit!,
+          ...taskToEdit,
+          id: taskToEdit!.id!,
           title: task.title,
           description: task.description,
+          dueDate: task.dueDate,
+          priority: task.priority,
+          status: task.status,
         },
       }),
       {
-        success: (data) => {
-          const taskId = data.id;
-          navigate(`/task-lists/${taskId}`);
+        success: () => {
+          navigate(`/task-lists/${listId}`);
           return { title: "Successfully updated task list!" };
         },
         error: {
@@ -120,7 +124,9 @@ const NewTaskForm = () => {
               type="date"
               id="datePicker"
               defaultValue={
-                taskToEdit ? taskToEdit.dueDate?.getDate() : undefined
+                taskToEdit?.dueDate
+                  ? new Date(taskToEdit.dueDate).toISOString().split("T")[0]
+                  : undefined
               }
               onChange={handleTaskListChange}
             />

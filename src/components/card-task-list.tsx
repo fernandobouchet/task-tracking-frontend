@@ -14,12 +14,14 @@ const CardTaskList = ({ data }: Props) => {
         </Card.Header>
         <Card.Body color="fg.muted" gap="2" width="full">
           <Text>Tasks: {data.tasks?.length}</Text>
-          <Progress.Root defaultValue={data.count}>
+          <Progress.Root defaultValue={data.progress}>
             <HStack>
               <Progress.Track flex="1">
                 <Progress.Range />
               </Progress.Track>
-              <Progress.ValueText>{data.count}</Progress.ValueText>
+              <Progress.ValueText>
+                {data.progress} / {data.count}
+              </Progress.ValueText>
             </HStack>
           </Progress.Root>
         </Card.Body>
