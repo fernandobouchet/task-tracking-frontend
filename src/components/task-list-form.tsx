@@ -24,8 +24,8 @@ const TaskListForm = () => {
   const updateTaskList = useUpdateTaskList();
 
   const [taskList, setTaskList] = useState<NewTaskListForm>({
-    title: "",
-    description: "",
+    title: taskListToEdit ? taskListToEdit.title : "",
+    description: taskListToEdit ? taskListToEdit?.description : "",
   });
 
   const handleTaskListChange = (
