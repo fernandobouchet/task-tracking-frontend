@@ -18,7 +18,12 @@ const CardTaskList = ({ data }: Props) => {
             defaultValue={
               isNaN(data?.progress as number) || data?.progress == null
                 ? 0
-                : data.progress
+                : data.progress * 100
+            }
+            value={
+              isNaN(data?.progress as number) || data?.progress == null
+                ? 0
+                : data.progress * 100
             }
           >
             <HStack>
@@ -28,7 +33,7 @@ const CardTaskList = ({ data }: Props) => {
               <Progress.ValueText>
                 {isNaN(data?.progress as number) || data?.progress == null
                   ? 0
-                  : data.progress}{" "}
+                  : data.progress * data.count!}{" "}
                 / {data.count}
               </Progress.ValueText>
             </HStack>

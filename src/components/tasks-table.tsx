@@ -1,8 +1,8 @@
 import { Button, HStack, Table, Text } from "@chakra-ui/react";
 import { CiEdit } from "react-icons/ci";
-import { LuSquare, LuSquareCheck } from "react-icons/lu";
 import { NavLink, useParams } from "react-router-dom";
 import { DeleteTaskAlertDialog } from "./delete-task-alert-dialog";
+import { TaskStatusToggle } from "./task-status-toggle";
 
 interface Props {
   tasks: Task[];
@@ -14,9 +14,8 @@ const TasksTable = ({ tasks }: Props) => {
 
   const rows = items.map((item) => (
     <Table.Row key={item.id}>
-      <Table.Cell></Table.Cell>
       <Table.Cell>
-        {item.status === "OPEN" ? <LuSquare /> : <LuSquareCheck />}
+        <TaskStatusToggle task={item} />
       </Table.Cell>
       <Table.Cell>
         <Text lineClamp={1}>{item.title}</Text>
@@ -30,7 +29,7 @@ const TasksTable = ({ tasks }: Props) => {
         </Text>
       </Table.Cell>
       <Table.Cell>
-        <HStack>
+        <HStack flex="auto" justifyContent="space-evenly">
           <Button variant="ghost" padding="0" asChild>
             <NavLink to={`/task-lists/${listId}/edit-task/${item.id}`}>
               <CiEdit />
@@ -47,7 +46,6 @@ const TasksTable = ({ tasks }: Props) => {
       <Table.Root stickyHeader>
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeader w="6"></Table.ColumnHeader>
             <Table.ColumnHeader>Done</Table.ColumnHeader>
             <Table.ColumnHeader>Title</Table.ColumnHeader>
             <Table.ColumnHeader>Priority</Table.ColumnHeader>

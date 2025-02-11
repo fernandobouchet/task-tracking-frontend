@@ -68,3 +68,15 @@ export const updateTask = async (
   });
   return response.data;
 };
+
+export const updateTaskStatus = async (
+  id: string,
+  taskId: string,
+  data: Task
+): Promise<Task> => {
+  const response = await api.put(`/task-lists/${id}/tasks/${taskId}`, {
+    ...data,
+    status: data.status === "OPEN" ? "CLOSED" : "OPEN",
+  });
+  return response.data;
+};
