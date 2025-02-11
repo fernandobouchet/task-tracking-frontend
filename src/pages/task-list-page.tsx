@@ -48,7 +48,7 @@ const TaskListPage = () => {
                 isNaN(taskList?.progress as number) ||
                 taskList?.progress == null
                   ? 0
-                  : taskList.progress * 100
+                  : taskList.progress
               }
               width={{ base: "xs", sm: "lg" }}
             >

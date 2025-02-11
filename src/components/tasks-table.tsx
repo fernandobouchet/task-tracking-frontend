@@ -1,7 +1,8 @@
 import { Button, HStack, Table, Text } from "@chakra-ui/react";
-import { CiEdit, CiTrash } from "react-icons/ci";
+import { CiEdit } from "react-icons/ci";
 import { LuSquare, LuSquareCheck } from "react-icons/lu";
 import { NavLink, useParams } from "react-router-dom";
+import { DeleteTaskAlertDialog } from "./delete-task-alert-dialog";
 
 interface Props {
   tasks: Task[];
@@ -35,9 +36,7 @@ const TasksTable = ({ tasks }: Props) => {
               <CiEdit />
             </NavLink>
           </Button>
-          <Button variant="ghost" padding="0">
-            <CiTrash />
-          </Button>
+          <DeleteTaskAlertDialog taskId={item.id!} />
         </HStack>
       </Table.Cell>
     </Table.Row>

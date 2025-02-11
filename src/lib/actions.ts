@@ -44,10 +44,13 @@ export const createTask = async (
   return response.data;
 };
 
-export const deleteTaskById = async (
-  id: string,
-  taskId: string
-): Promise<Task> => {
+export const deleteTaskById = async ({
+  id,
+  taskId,
+}: {
+  id: string;
+  taskId: string;
+}): Promise<Task> => {
   const response = await api.delete(`/task-lists/${id}/tasks/${taskId}`);
   return response.data;
 };

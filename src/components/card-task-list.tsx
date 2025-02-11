@@ -14,13 +14,22 @@ const CardTaskList = ({ data }: Props) => {
         </Card.Header>
         <Card.Body color="fg.muted" gap="2" width="full">
           <Text>Tasks: {data.tasks?.length}</Text>
-          <Progress.Root defaultValue={data.progress}>
+          <Progress.Root
+            defaultValue={
+              isNaN(data?.progress as number) || data?.progress == null
+                ? 0
+                : data.progress
+            }
+          >
             <HStack>
               <Progress.Track flex="1">
                 <Progress.Range />
               </Progress.Track>
               <Progress.ValueText>
-                {data.progress} / {data.count}
+                {isNaN(data?.progress as number) || data?.progress == null
+                  ? 0
+                  : data.progress}{" "}
+                / {data.count}
               </Progress.ValueText>
             </HStack>
           </Progress.Root>
