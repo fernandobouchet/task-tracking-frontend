@@ -6,6 +6,7 @@ import { Text } from "@chakra-ui/react";
 import { TaskListPage } from "./pages/task-list-page";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NewTaskPage } from "./pages/new-task-page";
+import { MdHome } from "react-icons/md";
 
 const TaskLists = () => <Home />;
 const CreateUpdateTaskListScreen = () => <TaskListFormPage />;
@@ -22,7 +23,7 @@ function App() {
         <nav className="nav">
           <Link to="/">
             <Text fontWeight={500} fontSize={{ base: "2xl" }}>
-              Home
+              <MdHome size="2rem" />
             </Text>
           </Link>
         </nav>
