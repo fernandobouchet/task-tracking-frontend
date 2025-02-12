@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# Task List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A task management system, developed with [React.js](https://react.dev/) and [Vite](https://vitejs.dev/), styled using [Tailwind CSS](https://tailwindcss.com/) and [Chakra UI](https://chakra-ui.com/). It is designed to organise and prioritise tasks.
 
-Currently, two official plugins are available:
+## **Features**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Task Management**: Create, update, and delete task lists and tasks.
+- **Task Organisation**: Mark tasks as completed or pending.
+- **User Interaction**: Intuitive interface with a responsive design for all devices.
+- **Future Enhancements**: Login functionality.
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![App Screenshot](https://raw.githubusercontent.com/fernandobouchet/task-tracking-frontend/refs/heads/master/preview.webp)
 
-- Configure the top-level `parserOptions` property like this:
+## Demo
+>[!IMPORTANT]
+The app services are hosted on free platforms, so please be patient as loading times may vary.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+[https://mytaskslistdemo.netlify.app](https://mytaskslistdemo.netlify.app)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Used libraries
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- [React.js](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Chakra UI](https://chakra-ui.com/)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## **Prerequisites**
+
+- Node.js >= 18
+- npm
+
+## Getting started
+
+- **Set up the environment**
+
+  Create a `.env` file in the root folder and define the necessary variables:
+  ```env
+  VITE_API_URL="http://localhost:8080"
+  ```
+
+- **Clone the repository**:
+  ```bash
+  git clone https://github.com/fernandobouchet/task-tracking-frontend
+  cd task-tracking-frontend
+  ```
+
+- **Run the Frontend**:
+  ```bash
+  npm install
+  npm run dev
+  ```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the frontend.
